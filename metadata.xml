@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities>
+	<ExtensionPackages>
+		<ExtensionPackage name="BMMashupShowcase"
+						  description="Makes switching between mashups easier"
+						  vendor="ThingWorx Customer Service"
+						  packageVersion="1.0.96" 
+						  minimumThingWorxVersion="6.0.0" />
+	</ExtensionPackages>
+	<Widgets>
+		<Widget name="BMMashupShowcase">
+			<UIResources>
+				<!-- Runtime/Squeal ONLY -->
+				<FileResource type="CSS" file="BMMashupShowcase.css" description="" isDevelopment="true" isRuntime="false" />
+				<FileResource type="JS" file="BMMashupShowcase.js" description="" isDevelopment="true" isRuntime="false" />
+			</UIResources>
+		</Widget>
+	</Widgets>
+</Entities>
