@@ -1,5 +1,7 @@
 # BMMashupShowcase
 
+Requires CoreUI.
+
 The mashup showcase extension makes it easier to select between open mashups.
 
 It does so by providing a full-screen preview of all the open mashups.

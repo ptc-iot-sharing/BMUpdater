@@ -4,7 +4,7 @@
 		<ExtensionPackage name="BMMashupShowcase"
 						  description="Makes switching between mashups easier"
 						  vendor="ThingWorx Customer Service"
-						  packageVersion="1.0.96" 
+						  packageVersion="1.0.100" 
 						  minimumThingWorxVersion="6.0.0" />
 	</ExtensionPackages>
 	<Widgets>

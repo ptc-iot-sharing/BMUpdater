@@ -252,7 +252,7 @@ function BMMashupShowcaseEnter() {
 		delay: 100,
 		easing: 'easeOutExpo',
 		progress: function (elements, progress) {
-			_BMMashupShowcaseView[0].style.backgroundColor = 'rgba(0, 0, 0, ' + (progress / .75) + ')';
+			_BMMashupShowcaseView[0].style.background = 'rgba(0, 0, 0, ' + (progress * .75) + ')';
 		}
 	});
 
@@ -284,7 +284,7 @@ function BMMashupShowcaseExit() {
 		delay: 200,
 		easing: 'easeInExpo',
 		progress: function (elements, progress) {
-			_BMMashupShowcaseView[0].style.backgroundColor = 'rgba(0, 0, 0, ' + ((1 - progress) / .75) + ')';
+			_BMMashupShowcaseView[0].style.background = 'rgba(0, 0, 0, ' + ((1 - progress) * .75) + ')';
 		}
 	});
 
