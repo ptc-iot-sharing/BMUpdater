@@ -1,19 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Entities>
-	<ExtensionPackages>
-		<ExtensionPackage name="BMMashupShowcase"
-						  description="Makes switching between mashups easier"
-						  vendor="ThingWorx Customer Service"
-						  packageVersion="1.0.100" 
-						  minimumThingWorxVersion="6.0.0" />
-	</ExtensionPackages>
-	<Widgets>
-		<Widget name="BMMashupShowcase">
-			<UIResources>
-				<!-- Runtime/Squeal ONLY -->
-				<FileResource type="CSS" file="BMMashupShowcase.css" description="" isDevelopment="true" isRuntime="false" />
-				<FileResource type="JS" file="BMMashupShowcase.js" description="" isDevelopment="true" isRuntime="false" />
-			</UIResources>
-		</Widget>
-	</Widgets>
+<?xml version="1.0" encoding="UTF-8"?><Entities>
+  <ExtensionPackages>
+    <ExtensionPackage name="BMUpdater" description="Automatically checks for updates to roicentersvn extensions." vendor="ThingWorx Customer Service" packageVersion="1.0.70" minimumThingWorxVersion="6.0.0"/>
+  </ExtensionPackages>
+  <Widgets>
+    <Widget name="BMUpdater">
+      <UIResources>
+        <FileResource type="CSS" file="BMUpdater.css" description="" isDevelopment="true" isRuntime="false"/>
+        <FileResource type="JS" file="BMUpdater.js" description="" isDevelopment="true" isRuntime="false"/>
+      </UIResources>
+    </Widget>
+  </Widgets>
 </Entities>

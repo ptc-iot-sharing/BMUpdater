@@ -1,5 +1,3 @@
-# 1.0.100
-
-Requires CoreUI.
+# 1.0.70
 
 Initial release.

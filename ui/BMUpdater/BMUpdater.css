@@ -1,0 +1,25 @@
+.BMUpdaterContent {
+	display: flex;
+	flex-direction: column;
+	padding-top: 72px;
+	box-sizing: border-box;
+}
+
+.BMUpdaterList {
+	flex-grow: 1;
+	width: 100%;
+	position: relative;
+}
+
+.BMUpdaterFooter {
+	height: 64px;
+	width: 100%;
+
+	display: flex;
+	align-content: flex-end;
+	align-items: flex-end;
+	justify-content: flex-end;
+
+	padding-right: 8px;
+	box-sizing: border-box;
+}
