@@ -413,6 +413,8 @@ function BMSupportedExtensionListGetWithCompletionHandler(handler) {
 
 }
 
+let BMUpdaterCurrentUpdate;
+
 
 (async function () {
 	let updates = await BMCheckForUpdatesWithCompletionHandler();
@@ -507,6 +509,11 @@ function BMSupportedExtensionListGetWithCompletionHandler(handler) {
 						if (installing) return;
 						installing = YES;
 
+						await BMUpdaterCurrentUpdate;
+
+						let resolve;
+						BMUpdaterCurrentUpdate = new Promise(($0, $1) => resolve = $0);
+
 						try {
 							await updates[indexPath.row].applyWithCompletionHandler(function () {}, {progress: function (fraction) {
 								$.Velocity(progress, 'stop');
@@ -528,6 +535,8 @@ function BMSupportedExtensionListGetWithCompletionHandler(handler) {
 
 							progress.style.width = '0px';
 						}
+
+						resolve();
 					});
 
 					cell.node.appendChild(name);
