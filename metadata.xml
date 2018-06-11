@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><Entities>
   <ExtensionPackages>
-    <ExtensionPackage name="BMUpdater" description="Automatically checks for updates to roicentersvn extensions." vendor="ThingWorx Customer Service" packageVersion="1.1.0" minimumThingWorxVersion="6.0.0"/>
+    <ExtensionPackage name="BMUpdater" description="Automatically checks for updates to roicentersvn extensions." vendor="ThingWorx Customer Service" packageVersion="1.1.1" minimumThingWorxVersion="6.0.0" buildNumber="{&quot;giteaURL&quot;: &quot;http://roicentersvn.ptcnet.ptc.com/api/v1/repos/BogdanMihaiciuc/BMUpdater/releases/latest&quot;}"/>
   </ExtensionPackages>
   <Widgets>
     <Widget name="BMUpdater">
