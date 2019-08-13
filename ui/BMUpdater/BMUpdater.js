@@ -27,6 +27,11 @@ BMExtensionUpdate.prototype = {
 	packages: undefined, // <[String]>
 
 	/**
+	 * The URL containing detailed release notes for this update, if available.
+	 */
+	releaseNotesURL: undefined, // <String, nullable>
+
+	/**
 	 * The update's progress.
 	 */
 	_progress: 0, // <Number>
@@ -91,6 +96,7 @@ BMExtensionUpdate.prototype = {
  * 	@param currentVersion <String>				The extension's current version.
  * 	@param newVersion <String>					The updated version.
  * 	@param packages <[String]>					An array containing the update packages that should be installed.
+ *  @param releaseNotesURL <String, nullable>	An optional string representing the location of the update notes for this extension.
  * }
  */
 BMExtensionUpdate.extensionUpdateWithPackageName = function (packageName, args) {
@@ -293,7 +299,7 @@ function BMCheckForUpdatesWithCompletionHandler(handler) {
 					let packages = [];
 					result.assets.forEach((asset) => {packages.push(asset.browser_download_url)});
 					// Then create the extension update
-					updates.push(BMExtensionUpdate.extensionUpdateWithPackageName(extension.name, {currentVersion: extension.packageVersion, newVersion: newVersion, packages: packages}));
+					updates.push(BMExtensionUpdate.extensionUpdateWithPackageName(extension.name, {currentVersion: extension.packageVersion, newVersion: newVersion, packages: packages, releaseNotesURL: result.html_url}));
 				}
 				
 				returnUpdates();
@@ -427,7 +433,7 @@ let BMUpdaterCurrentUpdate;
 
 	if (updates.length) {
 		let windowFrame = BMRectMake(0, 0, window.innerWidth, window.innerHeight);
-		let frame = BMRectMake(0, 0, 480, 72 * 2 + 56 * updates.length);
+		let frame = BMRectMake(0, 0, 576, 72 * 2 + 56 * updates.length);
 		frame.size.height = Math.min(800, frame.size.height);
 		frame.center = windowFrame.center;
 		let popup = (new BMWindow()).initWithFrame(frame);
@@ -469,23 +475,28 @@ let BMUpdaterCurrentUpdate;
 				numberOfSections: () => 1,
 				numberOfObjectsInSectionAtIndex: (index) => updates.length,
 				cellForItemAtIndexPath: (indexPath) => {
-					cell = updatesCollection.dequeueCellForReuseIdentifier('Update');
+					const cell = updatesCollection.dequeueCellForReuseIdentifier('Update');
 
 					cell.node.style.display = 'flex';
 					cell.node.style.paddingRight = '16px';
 					cell.node.style.boxSizing = 'border-box';
 
-					let name = document.createElement('div');
+					const name = document.createElement('div');
 					name.className = 'BMWindowLabel';
 					name.style.paddingLeft = '16px';
 					name.innerText = updates[indexPath.row].packageName;
 					
-					let version = document.createElement('div');
+					const version = document.createElement('div');
 					version.className = 'BMWindowLabel BMWindowSublabel BMWindowEllipsis';
 					version.style.flexGrow = 1;
 					version.innerText = '(' + updates[indexPath.row].currentVersion + ' ⇨ ' + updates[indexPath.row].newVersion + ')';
 
-					let install = document.createElement('button');
+					const releaseNotes = document.createElement('button');
+					releaseNotes.className = 'BMWindowButton BMWindowButtonWeak';
+					BMCopyProperties(releaseNotes, {innerText: 'Release Notes', flexGrow: 0, flexShrink: 0});
+					BMCopyProperties(releaseNotes.style, {paddingLeft: '8px', paddingRight: '8px', marginLeft: '8px', marginRight: '8px', position: 'relative'});
+
+					const install = document.createElement('button');
 					install.className = 'BMWindowButton BMWindowButtonWeak';
 					install.innerText = 'Update';
 					install.flexGrow = 0;
@@ -496,7 +507,7 @@ let BMUpdaterCurrentUpdate;
 					install.style.marginRight = '8px';
 					install.style.position = 'relative';
 
-					let progress = document.createElement('div');
+					const progress = document.createElement('div');
 					progress.style.position = 'absolute';
 					progress.style.left = '0px';
 					progress.style.top = '0px';
@@ -541,6 +552,7 @@ let BMUpdaterCurrentUpdate;
 
 					cell.node.appendChild(name);
 					cell.node.appendChild(version);
+					cell.node.append(releaseNotes);
 					cell.node.appendChild(install);
 
 					return cell;
@@ -555,6 +567,7 @@ let BMUpdaterCurrentUpdate;
 				updatesCollection.retainCellForIndexPath(BMIndexPathMakeWithRow(index, {section: 0, forObject: update}));
 			});
 
+			// Ugly but functional
 			installAll.addEventListener('click', function (event) {
 				updatesCollection.enumerateAllCellsWithBlock(function (cell) {
 					cell.node.querySelectorAll('button')[0].click();
