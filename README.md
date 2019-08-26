@@ -14,8 +14,7 @@ The auto updater will check for updates to compatible extensions whenever the co
   - [Development Environment](#development-environment)
   - [File Structure](#file-structure)
   - [Build](#build)  
-  - [Deployment](#deployment)  
-- [Credit/Acknowledgment](#creditacknowledgment)
+  - [Deployment](#deployment)
 - [License](#license)
 
 # Usage
