@@ -169,20 +169,20 @@ function BMGetContentsOfURL(URL, args) {
 
 /**
  * Applies the given update package to the server in which the script is running.
- * @param package <Blob>						The package to apply.
+ * @param extensionPackage <Blob>				The package to apply.
  * {
  * 	@param progress <void ^(nullable Number)>	A callback that is repeatedly invoked while this request is in progress.
  * }
  * @return <Promise<Void>>						A promise that resolves when the operation completes.
  */
-function BMPackageApply(package, args) {
+function BMPackageApply(extensionPackage, args) {
 	return new Promise(function (resolve, reject) {
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '/Thingworx/ExtensionPackageUploader?purpose=import', YES);
 		xhr.setRequestHeader('X-XSRF-TOKEN', 'TWX-XSRF-TOKEN-VALUE');
 
 		let data = new FormData();
-		data.append('file', new Blob([package], {type: 'application/octet-stream'}), 'Extensions.zip');
+		data.append('file', new Blob([extensionPackage], {type: 'application/octet-stream'}), 'Extensions.zip');
 
 		xhr.onload = function () {
 			if (args.progress) {
@@ -392,7 +392,7 @@ function BMSupportedExtensionListGetWithCompletionHandler(handler) {
 			result.rows.forEach(function (row) {
 				try {
 					if (row.buildNumber) {
-						let updaterURL = JSON.parse(row.buildNumber).giteaURL;
+						let updaterURL = JSON.parse(row.buildNumber).gitHubURL || JSON.parse(row.buildNumber).giteaURL;
 	
 						if (updaterURL) {
 							row.updaterURL = updaterURL;
@@ -494,7 +494,12 @@ let BMUpdaterCurrentUpdate;
 					const releaseNotes = document.createElement('button');
 					releaseNotes.className = 'BMWindowButton BMWindowButtonWeak';
 					BMCopyProperties(releaseNotes, {innerText: 'Release Notes', flexGrow: 0, flexShrink: 0});
-					BMCopyProperties(releaseNotes.style, {paddingLeft: '8px', paddingRight: '8px', marginLeft: '8px', marginRight: '8px', position: 'relative'});
+					BMCopyProperties(releaseNotes.style, {paddingLeft: '8px', paddingRight: '8px', marginLeft: '8px', marginRight: '8px', position: 'relative', whiteSpace: 'nowrap'});
+					releaseNotes.addEventListener('click', event => {
+						window.open(indexPath.object.releaseNotesURL, '_blank');
+					});
+
+					if (!indexPath.object.releaseNotesURL) releaseNotes.style.display = 'none';
 
 					const install = document.createElement('button');
 					install.className = 'BMWindowButton BMWindowButtonWeak';
