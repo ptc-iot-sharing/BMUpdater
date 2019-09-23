@@ -1,3 +1,7 @@
+# 1.1.4
+
+Resolved a misconfiguration that caused the updater to check for updates at a wrong URL for itself.
+
 # 1.1.3
 
 Resolved an issue that caused updates from GitHub to fail due to CORS issues. Downloads are now routed through the `LoadBinary` method available in Thingworx to resolve this.
