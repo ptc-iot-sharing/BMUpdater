@@ -1,3 +1,7 @@
+# 1.1.3
+
+Resolved an issue that caused updates from GitHub to fail due to CORS issues. Downloads are now routed through the `LoadBinary` method available in Thingworx to resolve this.
+
 # 1.1.2
 
 Added support for specifying a `gitHubURL` in the package build number. This has precedence over the old `giteaURL` but is otherwise identical.
