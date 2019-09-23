@@ -125,7 +125,12 @@ BMExtensionUpdate.extensionUpdateWithPackageName = function (packageName, args) 
 function BMGetContentsOfURL(URL, args) {
 	return new Promise(function (resolve, reject) {
 		let request = new XMLHttpRequest();
-		request.open('GET', URL, YES);
+		request.open('POST', '/Thingworx/Resources/ContentLoaderFunctions/Services/LoadBinary', YES);
+		request.setRequestHeader('X-XSRF-TOKEN', 'TWX-XSRF-TOKEN-VALUE');
+		request.setRequestHeader('Accept', 'application/octet-stream');
+		request.setRequestHeader('Content-Type', 'application/json');
+
+		//request.open('GET', URL, YES);
 	
 		args.withMimeType = args.withMimeType || 'application/octet-stream';
 	
@@ -162,8 +167,10 @@ function BMGetContentsOfURL(URL, args) {
 				}
 			});
 		}
+
+		request.send(JSON.stringify({url: URL}));
 	
-		request.send();
+		//request.send();
 	});
 };
 
